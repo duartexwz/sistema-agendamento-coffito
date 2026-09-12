@@ -1,0 +1,32 @@
+.term-box {
+  max-height: 320px;
+  overflow: auto;
+  padding: 16px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #f8fafc;
+}
+
+.term-box h3 {
+  margin: 0 0 6px;
+  font-size: 1rem;
+  color: #0b376d;
+}
+
+.term-box .term-intro {
+  margin-bottom: 12px;
+  color: #475569;
+}
+
+.term-box ol {
+  margin: 0;
+  padding-left: 20px;
+}
+
+.term-box li {
+  margin-bottom: 10px;
+}
+
+.term-box p:last-child {
+  margin-bottom: 0;
+}

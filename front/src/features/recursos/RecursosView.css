@@ -1,0 +1,78 @@
+.resource-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.resource-summary-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.resource-filters {
+  grid-template-columns: minmax(240px, 1fr) minmax(180px, 0.4fr);
+}
+
+.resource-table-header {
+  padding: 18px 20px 8px;
+}
+
+.resource-table-header h3 {
+  margin: 0;
+}
+
+.resource-table-header p {
+  margin: 4px 0 0;
+  color: var(--muted);
+}
+
+.resource-booking-table td:nth-child(3) {
+  min-width: 190px;
+}
+
+.resource-modal {
+  width: min(680px, 100%);
+}
+
+.resource-form-grid {
+  grid-template-columns: minmax(0, 1.2fr) minmax(160px, 0.6fr);
+}
+
+.grid-column-full {
+  grid-column: 1 / -1;
+}
+
+.resource-card {
+  min-height: 96px;
+}
+
+.resource-card i {
+  display: grid;
+  width: 42px;
+  height: 42px;
+  place-items: center;
+  border-radius: 8px;
+  background: #edf7f6;
+  color: var(--accent);
+  font-size: 1.2rem;
+}
+
+@media (max-width: 1180px) {
+  .resource-summary-grid,
+  .resource-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .resource-filters,
+  .resource-form-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 620px) {
+  .resource-summary-grid,
+  .resource-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+
