@@ -7,6 +7,7 @@ import {
   TIPOS_USUARIOS,
 } from '../../shared/constants/domain.js';
 import { EmptyState } from '../../shared/components/EmptyState.jsx';
+import { ConfirmModal } from '../../shared/components/ConfirmModal.jsx';
 import { getFriendlyErrorMessage } from '../../shared/utils/errors.js';
 import { Edit, Trash2 } from 'lucide-react';
 
@@ -38,6 +39,8 @@ export function AdminQueue({
   const [currentPage, setCurrentPage] = useState(1);
   const [showCreateModal, setShowCreateModal] = useState(false);
   const [editingUser, setEditingUser] = useState(null);
+  const [pendingDeleteUser, setPendingDeleteUser] = useState(null);
+  const [isDeleting, setIsDeleting] = useState(false);
   const [actionConfirmation, setActionConfirmation] = useState(null);
   const [actionError, setActionError] = useState('');
   const catalogs = useMemo(
@@ -78,21 +81,22 @@ export function AdminQueue({
     setCurrentPage(1);
   }
 
-  async function handleDeleteUsuario(usuario) {
+  async function handleConfirmDelete() {
+    if (!pendingDeleteUser) return;
+    setIsDeleting(true);
     setActionError('');
-    const confirmed = window.confirm(`Excluir o usuário "${usuario.nome}"?\n\nEssa ação removerá o cadastro interno.`);
-
-    if (!confirmed) return;
-
     try {
-      await onDeleteUsuario(usuario.id);
+      await onDeleteUsuario(pendingDeleteUser.id);
       setActionConfirmation({
         title: 'Usuário excluído',
         description: 'O cadastro interno foi removido com sucesso.',
-        usuario,
+        usuario: pendingDeleteUser,
       });
+      setPendingDeleteUser(null);
     } catch (deleteError) {
       setActionError(getFriendlyErrorMessage(deleteError, 'cadastro'));
+    } finally {
+      setIsDeleting(false);
     }
   }
 
@@ -221,7 +225,10 @@ export function AdminQueue({
                               className="btn btn-outline-danger btn-sm"
                               type="button"
                               title="Excluir colaborador"
-                              onClick={() => handleDeleteUsuario(usuario)}
+                              onClick={() => {
+                                setActionError('');
+                                setPendingDeleteUser(usuario);
+                              }}
                             >
                               <Trash2 size={14} />
                             </button>
@@ -295,6 +302,28 @@ export function AdminQueue({
             });
           }}
         />
+      )}
+      {pendingDeleteUser && (
+        <ConfirmModal
+          open={Boolean(pendingDeleteUser)}
+          variant="danger"
+          title={`Excluir "${pendingDeleteUser.nome}"?`}
+          description="Essa ação removerá o cadastro interno e não pode ser desfeita."
+          confirmLabel="Excluir usuário"
+          cancelLabel="Cancelar"
+          loading={isDeleting}
+          onClose={() => !isDeleting && setPendingDeleteUser(null)}
+          onConfirm={handleConfirmDelete}
+        >
+          <div className="user-created-summary">
+            <div>
+              <strong>{pendingDeleteUser.nome}</strong>
+              <span>{pendingDeleteUser.email}</span>
+              {pendingDeleteUser.matricula && <span>Matrícula: {pendingDeleteUser.matricula}</span>}
+            </div>
+          </div>
+          <p className="confirm-modal-hint">O acesso do usuário será revogado imediatamente.</p>
+        </ConfirmModal>
       )}
       {actionConfirmation && (
         <UserActionConfirmationModal

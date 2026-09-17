@@ -1,0 +1,84 @@
+.confirm-modal {
+  width: min(480px, 100%);
+}
+
+.confirm-modal-header {
+  align-items: flex-start;
+}
+
+.confirm-modal-title-group {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  flex: 1;
+  min-width: 0;
+}
+
+.confirm-icon {
+  display: inline-grid;
+  width: 44px;
+  height: 44px;
+  flex: 0 0 44px;
+  place-items: center;
+  border-radius: 999px;
+  border: 1px solid transparent;
+}
+
+.confirm-icon--danger {
+  background: #fef2f2;
+  border-color: #fecaca;
+  color: #dc3545;
+}
+
+.confirm-icon--warning {
+  background: #fff4d6;
+  border-color: #ffe08a;
+  color: #664d03;
+}
+
+.confirm-icon--primary {
+  background: #eaf2ff;
+  border-color: #cfe0f6;
+  color: var(--brand);
+}
+
+.confirm-modal-header h3 {
+  margin: 2px 0 4px;
+  font-size: 1.15rem;
+  line-height: 1.3;
+}
+
+.confirm-modal-header p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.92rem;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.confirm-modal-body {
+  padding: 16px 22px 4px;
+}
+
+.confirm-modal-body .user-created-summary {
+  margin: 0;
+}
+
+.confirm-modal-hint {
+  margin: 12px 0 0;
+  color: #41566f;
+  font-size: 0.88rem;
+  line-height: 1.5;
+}
+
+@media (max-width: 620px) {
+  .confirm-modal-title-group {
+    gap: 12px;
+  }
+
+  .confirm-icon {
+    width: 40px;
+    height: 40px;
+    flex-basis: 40px;
+  }
+}
