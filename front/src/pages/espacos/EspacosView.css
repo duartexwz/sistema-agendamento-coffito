@@ -1,0 +1,92 @@
+.space-card-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.space-module-stack {
+  display: grid;
+  gap: 16px;
+}
+
+.space-module {
+  display: grid;
+  gap: 14px;
+}
+
+.space-count {
+  align-self: start;
+  padding: 6px 10px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: #f8fafc;
+  color: var(--muted);
+  font-size: 0.82rem;
+  font-weight: 800;
+}
+
+.space-card {
+  padding: 16px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+}
+
+.space-card-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  align-items: flex-start;
+}
+
+.space-card h3,
+.resource-card h3 {
+  margin: 0;
+  font-size: 1rem;
+}
+
+.space-card p {
+  color: var(--muted);
+}
+
+.space-form-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.space-card dl {
+  display: grid;
+  gap: 8px;
+}
+
+.space-system-fields {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 10px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #f8fafc;
+  color: var(--muted);
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+.space-card dt {
+  color: var(--muted);
+  font-size: 0.76rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.space-card dd {
+  margin: 0;
+}
+
+.compact-form {
+  gap: 10px;
+}
+
+@media (max-width: 900px) {
+  .space-card-grid,
+  .space-form-grid {
+    grid-template-columns: 1fr;
+  }
+}
+

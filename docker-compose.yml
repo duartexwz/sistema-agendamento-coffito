@@ -1,0 +1,73 @@
+services:
+  frontend:
+    build:
+      context: ./front
+      args:
+        VITE_API_BASE_URL: /api/v1
+    environment:
+      API_PROXY_TARGET: http://api:8090
+    ports:
+      - "8010:4173"
+    depends_on:
+      - api
+
+  api:
+    build:
+      context: ./back
+    environment:
+      DATABASE_URL: postgresql://postgres:postgres@db:5432/agendamento_dbpg
+      USER_DB: postgres
+      USER_PASSWORD: postgres
+      ACCESS_TOKEN_EXPIRE_MINUTES: 15
+      REFRESH_TOKEN_EXPIRE_DAYS: 7
+      SECRET_KEY: chave-local-de-homologacao
+      CLIENT_ID: 1
+      CLIENT_SECRET: local
+      ALGORITHM: HS256
+      COOKIE_SECURE: "false"
+      COOKIE_SAMESITE: lax
+      COOKIE_DOMAIN: ""
+      CORS_ORIGINS: http://localhost,http://127.0.0.1,http://127.0.0.1:8080
+      SMTP_HOST: ${SMTP_HOST:-smtp.gmail.com}
+      SMTP_PORT: ${SMTP_PORT:-587}
+      SMTP_USER: ${SMTP_USER:-eventos@coffito.gov.br}
+      SMTP_PASSWORD: ${SMTP_PASSWORD:-fxamnvsgycaxsxdj}
+      SMTP_FROM: ${SMTP_FROM:-eventos@coffito.gov.br}
+      SMTP_USE_TLS: ${SMTP_USE_TLS:-true}
+      SMTP_USE_SSL: ${SMTP_USE_SSL:-false}
+      APP_PUBLIC_URL: ${APP_PUBLIC_URL:-http://172.16.10.28:8080}
+    expose:
+      - "8090"
+    ports:
+      - "8090:8090"
+    depends_on:
+      db:
+        condition: service_healthy
+      mailpit:
+        condition: service_started
+
+  mailpit:
+    image: axllent/mailpit:latest
+    ports:
+      - "127.0.0.1:8025:8025"
+    expose:
+      - "1025"
+
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: agendamento_dbpg
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./back/docker/00-create-owner-role.sql:/docker-entrypoint-initdb.d/00-create-owner-role.sql:ro
+      - ./back/banco_otimizado.sql:/docker-entrypoint-initdb.d/04-banco_otimizado.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d agendamento_dbpg"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+volumes:
+  postgres_data:
