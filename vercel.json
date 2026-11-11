@@ -1,29 +1,42 @@
 {
-  "version": 2,
-  "builds": [
+  "$schema": "https://openapi.vercel.sh/",
+  "regions": ["gru1"],
+  "services": {
+    "front": {
+      "root": "front",
+      "framework": "vite",
+      "buildCommand": "npm run build",
+      "installCommand": "npm install"
+    },
+    "back": {
+      "root": "back",
+      "framework": "fastapi",
+      "entrypoint": "api.app:app",
+      "installCommand": "pip install -r requirements.txt",
+      "buildCommand": "pip install -r requirements.txt"
+    }
+  },
+  "rewrites": [
+    { "source": "/api/:path*", "destination": { "type": "service", "service": "back"}},
+    { "source": "/(.*)", "destination": {"type": "service", "service": "front"}}
+  ],
+  "headers": [
     {
-      "src": "back/api/app.py",
-      "use": "@vercel/python"
+      "source": "/assets/(.*)",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable"}
+      ]
     },
     {
-      "src": "front/package.json",
-      "use": "@vercel/static-build",
-      "config": {
-        "distDir": "dist"
-      }
+      "source": "/api/:path",
+      "headers": [
+        { "key": "Cache-Control", "value": "no-store" },
+        { "key": "Access-Control-Allow-Origin", "value": "*" },
+        { "key": "Access-Control-Allow-Methods", "value": "GET,POST,PATCH,DELETE,OPTIONS" },
+        { "key": "Access-Control-Allow-Headers", "value": "Content-Type,Authorization" }
+      ]
     }
   ],
-  "routes": [
-    {
-      "src": "/api/v1/(.*)",
-      "dest": "back/api/app.py"
-    },
-    {
-      "handle": "filesystem"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/index.html"
-    }
-  ]
+  "cleanUrls": false,
+  "trailingSlash": false
 }
