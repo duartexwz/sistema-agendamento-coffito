@@ -26,7 +26,7 @@ T_FormData = Annotated[OAuth2PasswordRequestForm, Depends()]  # username/senha
 limiter = Limiter(key_func=get_remote_address)
 
 
-@router.post('/', summary='Login', response_model=LoginResponse)
+@router.post('', summary='Login', response_model=LoginResponse)
 @limiter.limit("3/minute")
 async def login(
     request: Request,
