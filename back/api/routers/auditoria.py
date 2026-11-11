@@ -10,7 +10,7 @@ from api.schemas.global_schemas import UsuarioLogado
 from api.security import get_current_user
 from api.services.auditoria_service import AuditoriaService
 
-router = APIRouter(prefix='auditoria', tags=['auditoria'])
+router = APIRouter(prefix='/auditoria', tags=['auditoria'])
 
 auditoria_service = AuditoriaService()
 
@@ -20,7 +20,7 @@ T_Filter = Annotated[AuditoriaLogFilter, Depends()]
 
 
 @router.get(
-    '',
+    '/',
     summary='Listar logs de auditoria',
     response_model=AuditoriaLogsList,
     status_code=HTTPStatus.OK,

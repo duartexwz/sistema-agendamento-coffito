@@ -16,7 +16,7 @@ from api.schemas.setor_solicitante_schemas import (
 from api.security import get_current_user
 from api.services.setor_solicitante_services import SetorSolicitanteService
 
-router = APIRouter(prefix='setor_solicitante', tags=['setor_solicitante'])
+router = APIRouter(prefix='/setor_solicitante', tags=['setor_solicitante'])
 
 # Instância única do serviço de setores (reaproveitada pelas rotas)
 setor_solicitante_service = SetorSolicitanteService()
@@ -44,7 +44,7 @@ async def criar_setor_solicitante(
 
 
 @router.get(
-    '',
+    '/',
     summary='Buscar Setores',
     response_model=SetorSolicitanteList,
     status_code=HTTPStatus.OK,

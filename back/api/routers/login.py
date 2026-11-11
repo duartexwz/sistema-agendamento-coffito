@@ -13,7 +13,7 @@ from api.security import set_auth_cookies
 from api.services.token_service import TokenService
 from api.services.auditoria_service import AuditoriaService
 
-router = APIRouter(prefix='login', tags=['login'])
+router = APIRouter(prefix='/login', tags=['login'])
 
 # Instância única do serviço de autenticação (reaproveitada pelas rotas)
 token_service = TokenService()
@@ -26,7 +26,7 @@ T_FormData = Annotated[OAuth2PasswordRequestForm, Depends()]  # username/senha
 limiter = Limiter(key_func=get_remote_address)
 
 
-@router.post('', summary='Login', response_model=LoginResponse)
+@router.post('/', summary='Login', response_model=LoginResponse)
 @limiter.limit("3/minute")
 async def login(
     request: Request,

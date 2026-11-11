@@ -16,7 +16,7 @@ from api.schemas.global_schemas import UsuarioLogado
 from api.security import get_current_user
 from api.services.acompanhamento_service import AcompanhamentoService
 
-router = APIRouter(prefix='acompanhamento', tags=['acompanhamento'])
+router = APIRouter(prefix='/acompanhamento', tags=['acompanhamento'])
 
 acompanhamento_service = AcompanhamentoService()
 
@@ -59,7 +59,7 @@ async def ajustar_solicitacao_publica(
 
 
 @router.get(
-    'interno',
+    '/interno',
     summary='Listar solicitações internas para acompanhamento',
     response_model=AcompanhamentoInternoListSchema,
     status_code=HTTPStatus.OK,

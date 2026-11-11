@@ -16,7 +16,7 @@ from api.schemas.status_reservas_schemas import (
 from api.security import get_current_user
 from api.services.status_reservas_service import StatusReservasService
 
-router = APIRouter(prefix='status_reservas', tags=['status_reservas'])
+router = APIRouter(prefix='/status_reservas', tags=['status_reservas'])
 
 # Instância única do serviço de status de reservas (reaproveitada pelas rotas)
 status_reservas_service = StatusReservasService()
@@ -44,7 +44,7 @@ async def criar_status_reservas(
 
 
 @router.get(
-    '',
+    '/',
     summary='Listar Status',
     response_model=StatusReservasList,
     status_code=HTTPStatus.OK,

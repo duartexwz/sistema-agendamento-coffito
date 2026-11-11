@@ -16,7 +16,7 @@ from api.schemas.usuarios_schemas import (
 from api.security import get_current_user
 from api.services.usuarios_services import UsuariosService
 
-router = APIRouter(prefix='usuarios', tags=['usuarios'])
+router = APIRouter(prefix='/usuarios', tags=['usuarios'])
 
 # Instância única do serviço de usuários (reaproveitada pelas rotas)
 usuarios_service = UsuariosService()
@@ -46,7 +46,7 @@ async def criar_usuario(
 
 
 @router.get(
-    '',
+    '/',
     summary='Listar usuários',
     status_code=HTTPStatus.OK,
     response_model=UsuarioList,

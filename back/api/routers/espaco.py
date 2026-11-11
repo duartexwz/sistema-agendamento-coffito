@@ -19,7 +19,7 @@ from api.schemas.global_schemas import (
 from api.security import get_current_user
 from api.services.espaco_service import EspacoService
 
-router = APIRouter(prefix='espacos', tags=['espacos'])
+router = APIRouter(prefix='/espacos', tags=['espacos'])
 
 # Instância única do serviço de espaços (reaproveitada pelas rotas)
 espaco_service = EspacoService()
@@ -48,7 +48,7 @@ async def cadastrar_espaco(
 
 
 @router.get(
-    '',
+    '/',
     summary='Listar Espaços',
     response_model=EspacoList,
     status_code=HTTPStatus.OK,

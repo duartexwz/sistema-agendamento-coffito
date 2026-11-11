@@ -30,12 +30,12 @@ T_OptionalCurrentUser = Annotated[
 ]
 
 
-@router.get('auth/me', response_model=LoginResponse, summary='Usuario autenticado')
+@router.get('/auth/me', response_model=LoginResponse, summary='Usuario autenticado')
 async def me(current_user: T_CurrentUser):
     return {'user': current_user}
 
 
-@router.post('auth/refresh', response_model=LoginResponse, summary='Renovar sessao')
+@router.post('/auth/refresh', response_model=LoginResponse, summary='Renovar sessao')
 async def refresh_session(
     response: Response,
     db: T_Session,
@@ -85,7 +85,7 @@ async def refresh_session(
     return {'user': user}
 
 
-@router.post('/logout/', response_model=MessageGlobal, summary='Encerrar sessao')
+@router.post('/logout', response_model=MessageGlobal, summary='Encerrar sessao')
 async def logout(
     request: Request,
     response: Response,

@@ -17,7 +17,7 @@
     }
   },
   "rewrites": [
-    { "source": "/api/:path*", "destination": { "type": "service", "service": "back"}},
+    { "source": "/api", "destination": { "type": "service", "service": "back"}},
     { "source": "/(.*)", "destination": {"type": "service", "service": "front"}}
   ],
   "headers": [

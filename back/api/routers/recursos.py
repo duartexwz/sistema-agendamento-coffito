@@ -19,7 +19,7 @@ from api.services.recursos_services import RecursosServices
 # Instância única do serviço de recursos (reaproveitada pelas rotas)
 recursos_services = RecursosServices()
 
-router = APIRouter(prefix='recursos', tags=['recursos'])
+router = APIRouter(prefix='/recursos', tags=['recursos'])
 
 # Aliases de injeção de dependência usados nos endpoints
 T_Session = Annotated[asyncpg.Connection, Depends(get_db)]
@@ -45,7 +45,7 @@ async def cadastrar_recursos(
 
 
 @router.get(
-    '',
+    '/',
     summary='Listar recursos',
     response_model=RecursosList,
     status_code=HTTPStatus.OK,

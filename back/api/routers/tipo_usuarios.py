@@ -16,7 +16,7 @@ from api.schemas.tipo_usuarios_schemas import (
 from api.security import get_current_user
 from api.services.tipo_usuarios_services import TipoUsuarioService
 
-router = APIRouter(prefix='tipos_usuarios', tags=['tipos_usuarios'])
+router = APIRouter(prefix='/tipos_usuarios', tags=['tipos_usuarios'])
 
 # Instância única do serviço de tipos de usuário (reaproveitada pelas rotas)
 tipos_usuarios_service = TipoUsuarioService()
@@ -44,7 +44,7 @@ async def criar_tipos_usuarios(
 
 
 @router.get(
-    '',
+    '/',
     summary='Buscar usuários',
     response_model=TipoUsuarioList,
     status_code=HTTPStatus.OK,

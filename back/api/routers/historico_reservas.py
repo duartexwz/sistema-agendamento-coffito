@@ -16,7 +16,7 @@ from api.schemas.historico_reservas_schemas import (
 from api.security import get_current_user
 from api.services.historico_reservas_services import HistoricoReservasService
 
-router = APIRouter(prefix='historico_reservas', tags=['historico_reservas'])
+router = APIRouter(prefix='/historico_reservas', tags=['historico_reservas'])
 
 # Instância única do serviço de histórico (reaproveitada pelas rotas)
 historico_reservas_service = HistoricoReservasService()
@@ -47,7 +47,7 @@ async def criar_historico(
 
 
 @router.get(
-    '',
+    '/',
     summary='Listar Histórico',
     response_model=HistoricoReservasList,
     status_code=HTTPStatus.OK,

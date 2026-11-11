@@ -18,7 +18,7 @@ from api.services.reservas_status_historico_services import (
 )
 
 router = APIRouter(
-    prefix='reservas_status_historico', tags=['reservas_status_historico']
+    prefix='/reservas_status_historico', tags=['reservas_status_historico']
 )
 
 # Instância única do serviço (reaproveitada pelas rotas)
@@ -54,7 +54,7 @@ async def atualizar_status_reserva(
 
 
 @router.get(
-    '',
+    '/',
     summary='Listar histórico de status das reservas',
     response_model=ReservasStatusHistoricoListSchema,
     status_code=HTTPStatus.OK,
