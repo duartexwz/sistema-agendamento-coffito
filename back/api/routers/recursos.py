@@ -45,7 +45,7 @@ async def cadastrar_recursos(
 
 
 @router.get(
-    '/',
+    '',
     summary='Listar recursos',
     response_model=RecursosList,
     status_code=HTTPStatus.OK,

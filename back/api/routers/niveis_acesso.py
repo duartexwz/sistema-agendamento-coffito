@@ -44,7 +44,7 @@ async def criar_niveis_acesso(
 
 
 @router.get(
-    '/',
+    '',
     summary='Buscar níveis de acesso',
     response_model=NiveisAcessoList,
     status_code=HTTPStatus.OK,

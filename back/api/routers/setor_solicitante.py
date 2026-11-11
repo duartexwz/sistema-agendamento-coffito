@@ -44,7 +44,7 @@ async def criar_setor_solicitante(
 
 
 @router.get(
-    '/',
+    '',
     summary='Buscar Setores',
     response_model=SetorSolicitanteList,
     status_code=HTTPStatus.OK,

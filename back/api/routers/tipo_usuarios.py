@@ -44,7 +44,7 @@ async def criar_tipos_usuarios(
 
 
 @router.get(
-    '/',
+    '',
     summary='Buscar usuários',
     response_model=TipoUsuarioList,
     status_code=HTTPStatus.OK,

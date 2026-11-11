@@ -36,7 +36,7 @@ async def solicitar_suporte(db: T_Session, suporte: SuporteSchema):
 
 
 @router.get(
-    '/',
+    '',
     summary='Listar Suportes',
     response_model=SuporteList,
     status_code=HTTPStatus.OK,

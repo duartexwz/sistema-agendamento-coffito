@@ -54,7 +54,7 @@ async def atualizar_status_reserva(
 
 
 @router.get(
-    '/',
+    '',
     summary='Listar histórico de status das reservas',
     response_model=ReservasStatusHistoricoListSchema,
     status_code=HTTPStatus.OK,

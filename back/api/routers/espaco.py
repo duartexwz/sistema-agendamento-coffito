@@ -48,7 +48,7 @@ async def cadastrar_espaco(
 
 
 @router.get(
-    '/',
+    '',
     summary='Listar Espaços',
     response_model=EspacoList,
     status_code=HTTPStatus.OK,

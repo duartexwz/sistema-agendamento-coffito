@@ -20,7 +20,7 @@ T_Filter = Annotated[AuditoriaLogFilter, Depends()]
 
 
 @router.get(
-    '/',
+    '',
     summary='Listar logs de auditoria',
     response_model=AuditoriaLogsList,
     status_code=HTTPStatus.OK,

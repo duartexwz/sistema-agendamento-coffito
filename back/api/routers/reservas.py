@@ -53,7 +53,7 @@ async def solicitar_reserva(
 
 
 @router.get(
-    '/',
+    '',
     summary='Listar reservas',
     response_model=ReservasList,
     status_code=HTTPStatus.OK,

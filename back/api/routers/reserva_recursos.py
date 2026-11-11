@@ -41,7 +41,7 @@ async def solicitar_reserva_recursos(
 
 
 @router.get(
-    '/',
+    '',
     summary='Listar Reservas de recursos',
     response_model=ReservaRecursosList,
     status_code=HTTPStatus.OK,

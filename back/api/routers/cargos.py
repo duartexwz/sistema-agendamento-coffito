@@ -42,7 +42,7 @@ async def criar_cargo(
 
 
 @router.get(
-    '/',
+    '',
     summary='Buscar Cargos',
     response_model=CargosList,
     status_code=HTTPStatus.OK,

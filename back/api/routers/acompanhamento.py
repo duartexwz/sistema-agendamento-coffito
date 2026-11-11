@@ -59,7 +59,7 @@ async def ajustar_solicitacao_publica(
 
 
 @router.get(
-    '/interno',
+    'interno',
     summary='Listar solicitações internas para acompanhamento',
     response_model=AcompanhamentoInternoListSchema,
     status_code=HTTPStatus.OK,

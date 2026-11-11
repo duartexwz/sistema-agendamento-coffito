@@ -44,7 +44,7 @@ async def criar_status_reservas(
 
 
 @router.get(
-    '/',
+    '',
     summary='Listar Status',
     response_model=StatusReservasList,
     status_code=HTTPStatus.OK,

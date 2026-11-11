@@ -47,7 +47,7 @@ async def criar_historico(
 
 
 @router.get(
-    '/',
+    '',
     summary='Listar Histórico',
     response_model=HistoricoReservasList,
     status_code=HTTPStatus.OK,

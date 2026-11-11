@@ -46,7 +46,7 @@ async def criar_usuario(
 
 
 @router.get(
-    '/',
+    '',
     summary='Listar usuários',
     status_code=HTTPStatus.OK,
     response_model=UsuarioList,
