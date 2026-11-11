@@ -18,7 +18,7 @@ from api.services.reserva_recursos_service import ReservaRecursosServices
 # Instância única do serviço de reserva de recursos (reaproveitada pelas rotas)
 reserva_recursos_services = ReservaRecursosServices()
 
-router = APIRouter(prefix='/reserva_recursos', tags=['reserva_recursos'])
+router = APIRouter(prefix='reserva_recursos', tags=['reserva_recursos'])
 
 
 # Aliases de injeção de dependência usados nos endpoints

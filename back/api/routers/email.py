@@ -11,7 +11,7 @@ from api.services.email_service import EmailService
 # Instância única do serviço de email (reaproveitada pelas rotas)
 email_service = EmailService()
 
-router = APIRouter(prefix='/email', tags=['email'])
+router = APIRouter(prefix='email', tags=['email'])
 
 # Injeção da conexão com o banco de dados
 T_Session = Annotated[asyncpg.Connection, Depends(get_db)]

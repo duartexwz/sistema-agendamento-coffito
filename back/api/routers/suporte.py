@@ -18,7 +18,7 @@ from api.services.suporte_services import SuporteService
 # Instância única do serviço de suporte (reaproveitada pelas rotas)
 suporte_service = SuporteService()
 
-router = APIRouter(prefix='/suporte', tags=['suporte'])
+router = APIRouter(prefix='suporte', tags=['suporte'])
 
 # Aliases de injeção de dependência usados nos endpoints
 T_Session = Annotated[asyncpg.Connection, Depends(get_db)]  # conexão com o DB

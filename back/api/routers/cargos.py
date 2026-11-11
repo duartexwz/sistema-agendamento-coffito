@@ -16,7 +16,7 @@ from api.schemas.global_schemas import MessageGlobal, UsuarioLogado
 from api.security import get_current_user
 from api.services.cargos_services import CargosService
 
-router = APIRouter(prefix='/cargos', tags=['cargos'])
+router = APIRouter(prefix='cargos', tags=['cargos'])
 
 # Instância única do serviço de cargos (reaproveitada pelas rotas)
 cargos_service = CargosService()

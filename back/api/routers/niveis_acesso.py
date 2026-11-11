@@ -16,7 +16,7 @@ from api.schemas.niveis_acesso_schemas import (
 from api.security import get_current_user
 from api.services.niveis_acesso_services import NiveisAcessoService
 
-router = APIRouter(prefix='/niveis_acesso', tags=['niveis_acesso'])
+router = APIRouter(prefix='niveis_acesso', tags=['niveis_acesso'])
 
 # Instância única do serviço de níveis de acesso (reaproveitada pelas rotas)
 niveis_acesso_service = NiveisAcessoService()

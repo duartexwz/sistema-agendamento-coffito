@@ -18,7 +18,7 @@ from api.services.reservas_status_historico_services import (
 )
 
 router = APIRouter(
-    prefix='/reservas_status_historico', tags=['reservas_status_historico']
+    prefix='reservas_status_historico', tags=['reservas_status_historico']
 )
 
 # Instância única do serviço (reaproveitada pelas rotas)

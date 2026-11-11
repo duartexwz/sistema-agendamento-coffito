@@ -100,7 +100,7 @@ async def csrf_cookie_protection(request: Request, call_next):
     return await call_next(request)
 
 
-api_v1 = APIRouter(prefix='/api/v1')
+api_v1 = APIRouter(prefix='api/v1')
 
 api_v1.include_router(auth.router)
 api_v1.include_router(acompanhamento.router)
