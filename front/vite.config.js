@@ -2,7 +2,7 @@ import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 
 const localApiProxy = {
-  target: 'http://127.0.0.1:8090',
+  target: 'http://0.0.0.1:8090',
   changeOrigin: true,
   secure: false,
 };
