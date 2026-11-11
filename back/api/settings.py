@@ -20,7 +20,7 @@ class Settings(BaseSettings):
     # === Autenticação (JWT) ===
     ACCESS_TOKEN_EXPIRE_MINUTES: int  # tempo de validade do token (minutos)
     SECRET_KEY: str  # chave secreta usada para assinar os tokens JWT
-    CLIENT_ID: int  # identificador de integração (OAuth)
+    CLIENT_ID: str  # identificador de integração (OAuth)
     CLIENT_SECRET: str  # segredo de integração (OAuth)
     ALGORITHM: str  # algoritmo de assinatura do JWT (ex.: HS256)
 
