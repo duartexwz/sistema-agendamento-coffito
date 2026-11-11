@@ -20,7 +20,7 @@ VALUES (
     1,
     1,
     '99999999999',
-    'admin.docker@coffito.gov.br',
+    'admin.public@gmail.com',
     '61999999999',
     '$argon2id$v=19$m=65536,t=3,p=4$/9VoZpTzqze8wS+RInM7nQ$dnaJ5tW1O8dY6gxv+vuec/IoCZhDpmJdvXFPLezX2IA',
     true,

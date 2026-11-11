@@ -5,7 +5,6 @@ const localApiProxy = {
   target: 'http://127.0.0.1:8090',
   changeOrigin: true,
   secure: false,
-  rewrite: (path) => path.replace(/^\/api-local/, ''),
 };
 
 export default defineConfig({
@@ -30,7 +29,7 @@ export default defineConfig({
     host: '127.0.0.1',
     port: 5173,
     proxy: {
-      '/api-local': localApiProxy,
+      '/api/v1': localApiProxy,
     },
   },
 });

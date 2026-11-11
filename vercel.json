@@ -3,7 +3,8 @@
   "services": {
     "back": {
       "root": "back",
-      "framework": "fastapi"
+      "framework": "fastapi",
+      "entrypoint": "api.app:app"
     },
     "front": {
       "root": "front",
@@ -11,6 +12,18 @@
     }
   },
   "rewrites": [
+    {
+      "source": "/api/v1",
+      "destination": {
+        "service": "back"
+      }
+    },
+    {
+      "source": "/api/v1/(.*)",
+      "destination": {
+        "service": "back"
+      }
+    },
     {
       "source": "/(.*)",
       "destination": {

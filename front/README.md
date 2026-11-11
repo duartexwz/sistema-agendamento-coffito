@@ -41,16 +41,16 @@ O frontend usa `front/src/services/api.js` como adapter HTTP.
 Por padrao:
 
 ```js
-VITE_API_BASE_URL=/api-local
+VITE_API_BASE_URL=/api/v1
 ```
 
-O `vite.config.js` encaminha `/api-local` para:
+O `vite.config.js` encaminha `/api/v1` para:
 
 ```text
-http://127.0.0.1:8000
+http://127.0.0.1:8090
 ```
 
-Isso permite rodar o frontend em `5173` e a API em `8000` sem conflito de CORS
+Isso permite rodar o frontend em `5173` e a API em `8090` sem conflito de CORS
 durante o desenvolvimento.
 
 ## Login e sessao

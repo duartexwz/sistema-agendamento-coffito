@@ -1,7 +1,7 @@
 DO $$
 BEGIN
-    IF NOT EXISTS (SELECT 1 FROM pg_roles WHERE rolname = 'Coffito@admin') THEN
-        CREATE ROLE "Coffito@admin";
+    IF NOT EXISTS (SELECT 1 FROM pg_roles WHERE rolname = 'Dev@admin') THEN
+        CREATE ROLE "Dev@admin";
     END IF;
 END
 $$;

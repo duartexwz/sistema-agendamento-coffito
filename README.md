@@ -111,8 +111,8 @@ O frontend deve subir em:
 http://127.0.0.1:5173
 ```
 
-O Vite esta configurado para encaminhar `/api-local` para a API local em
-`http://127.0.0.1:8000`, evitando problema de CORS no desenvolvimento.
+O Vite esta configurado para encaminhar `/api/v1` para a API local em
+`http://127.0.0.1:8090`, evitando problema de CORS no desenvolvimento.
 
 ### Docker HTTP para homologacao
 
@@ -128,11 +128,11 @@ O sistema fica disponivel em:
 http://127.0.0.1:8080
 ```
 
-Nesse modo, o React usa `VITE_API_BASE_URL=/api`. O container `frontend` serve
+Nesse modo, o React usa `VITE_API_BASE_URL=/api/v1`. O container `frontend` serve
 a SPA em `127.0.0.1:8080` e o proprio servidor Node do frontend encaminha
-`/api` para o container interno `api:8000`.
+`/api` para o container interno `api:8090`.
 
-A API tambem fica exposta localmente em `127.0.0.1:8000` apenas para facilitar
+A API tambem fica exposta localmente em `127.0.0.1:8090` apenas para facilitar
 testes na maquina de desenvolvimento.
 
 O Mailpit fica disponivel em:

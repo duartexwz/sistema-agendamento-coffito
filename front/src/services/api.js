@@ -2,7 +2,7 @@ import axios from 'axios';
 import { FAIXAS_PUBLICO, STATUS } from '../utils/constants/domain.js';
 import { getFriendlyErrorMessage } from '../utils/errors.js';
 
-const API_BASE_URL = (import.meta.env.VITE_API_BASE_URL ?? '/api-local').replace(/\/$/, '');
+const API_BASE_URL = (import.meta.env.VITE_API_BASE_URL ?? '/api/v1').replace(/\/$/, '');
 
 const COLLECTION_KEYS = {
   '/usuarios/': 'usuarios',
