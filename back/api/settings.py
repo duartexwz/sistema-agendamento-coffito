@@ -27,9 +27,9 @@ class Settings(BaseSettings):
     # === E-mail (SMTP) ===
     SMTP_HOST: str = 'smtp.gmail.com'  # servidor de envio de e-mail
     SMTP_PORT: int = 587  # porta do servidor SMTP
-    SMTP_USER: str = 'mayckonduarte006@gmail.com'  # usuário/login do SMTP
+    SMTP_USER: str = 'mayckonkennedy877@gmail.com'  # usuário/login do SMTP
     SMTP_PASSWORD: str = ''  # senha (ou App Password) do SMTP
-    SMTP_FROM: str = 'mayckonduarte006@gmail.com'  # remetente dos e-mails
+    SMTP_FROM: str = 'mayckonkennedy877@gmail.com'  # remetente dos e-mails
     SMTP_USE_TLS: bool = True  # habilita STARTTLS (portas 587/2525)
     SMTP_USE_SSL: bool = False  # habilita SSL/TLS implícito (porta 465)
     APP_PUBLIC_URL: str = 'http://localhost:8080'

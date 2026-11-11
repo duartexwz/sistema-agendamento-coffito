@@ -45,6 +45,7 @@ class TokenService:
             db, form_data.username
         )
 
+    
         if not user_record:
             raise HTTPException(
                 detail='Usuário ou senha inválidos',
@@ -56,7 +57,6 @@ class TokenService:
                 detail='Usuário ou senha inválidos',
                 status_code=HTTPStatus.UNAUTHORIZED,
             )
-
         access_token = await create_access_token(
             data={
                 'sub': user_record['email'],

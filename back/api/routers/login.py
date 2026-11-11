@@ -1,5 +1,8 @@
 from typing import Annotated
 
+
+from slowapi import Limiter
+from slowapi.util import get_remote_address
 import asyncpg
 from fastapi import APIRouter, Depends, HTTPException, Request, Response
 from fastapi.security import OAuth2PasswordRequestForm
@@ -7,22 +10,24 @@ from fastapi.security import OAuth2PasswordRequestForm
 from api.database import get_db
 from api.schemas.global_schemas import LoginResponse
 from api.security import set_auth_cookies
-from api.services import token_service
+from api.services.token_service import TokenService
 from api.services.auditoria_service import AuditoriaService
 
 router = APIRouter(prefix='/login', tags=['login'])
 
 # Instância única do serviço de autenticação (reaproveitada pelas rotas)
-token_service = token_service.TokenService()
+token_service = TokenService()
 auditoria_service = AuditoriaService()
 
 
 # Aliases de injeção de dependência usados nos endpoints
 T_Session = Annotated[asyncpg.Connection, Depends(get_db)]  # conexão com o DB
 T_FormData = Annotated[OAuth2PasswordRequestForm, Depends()]  # username/senha
+limiter = Limiter(key_func=get_remote_address)
 
 
 @router.post('', summary='Login', response_model=LoginResponse)
+@limiter.limit("3/minute")
 async def login(
     request: Request,
     response: Response,

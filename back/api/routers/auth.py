@@ -19,6 +19,7 @@ from api.security import (
 )
 from api.services.auditoria_service import AuditoriaService
 
+
 router = APIRouter(tags=['auth'])
 auditoria_service = AuditoriaService()
 

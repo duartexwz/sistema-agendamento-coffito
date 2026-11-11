@@ -15,19 +15,19 @@ services:
     build:
       context: ./back
     environment:
-      DATABASE_URL: postgresql://postgres:postgres@db:5432/agendamento_dbpg
-      USER_DB: postgres
-      USER_PASSWORD: postgres
-      ACCESS_TOKEN_EXPIRE_MINUTES: 15
-      REFRESH_TOKEN_EXPIRE_DAYS: 7
-      SECRET_KEY: chave-local-de-homologacao
-      CLIENT_ID: 1
-      CLIENT_SECRET: local
-      ALGORITHM: HS256
-      COOKIE_SECURE: "false"
-      COOKIE_SAMESITE: lax
-      COOKIE_DOMAIN: ""
-      CORS_ORIGINS: http://localhost,http://127.0.0.1,http://127.0.0.1:8080
+      DATABASE_URL: ${DATABASE_URL}
+      USER_DB: ${USER_DB}
+      USER_PASSWORD: ${USER_PASSWORD}
+      ACCESS_TOKEN_EXPIRE_MINUTES: ${ACCESS_TOKEN_EXPIRE_MINUTES}
+      REFRESH_TOKEN_EXPIRE_DAYS: ${REFRESH_TOKEN_EXPIRE_DAYS}
+      SECRET_KEY: ${SECRET_KEY}
+      CLIENT_ID: ${CLIENT_ID}
+      CLIENT_SECRET: ${CLIENT_SECRET}
+      ALGORITHM: ${ALGORITHM}
+      COOKIE_SECURE: ${COOKIE_SECURE}
+      COOKIE_SAMESITE: ${COOKIE_SAMESITE}
+      COOKIE_DOMAIN: ${COOKIE_DOMAIN}
+      CORS_ORIGINS: ${CORS_ORIGINS}
       SMTP_HOST: ${SMTP_HOST:-smtp.gmail.com}
       SMTP_PORT: ${SMTP_PORT:-587}
       SMTP_USER: ${SMTP_USER:-eventos@coffito.gov.br}
