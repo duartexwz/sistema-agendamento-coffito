@@ -1,4 +1,5 @@
 import os
+import re
 from contextlib import asynccontextmanager
 
 import asyncpg
@@ -101,12 +102,38 @@ async def csrf_cookie_protection(request: Request, call_next):
     return await call_next(request)
 
 
+def _compile_path_pattern(path: str) -> re.Pattern:
+    """
+    Converte um caminho do OpenAPI (ex.: ``/api/v1/espacos/{id}``) em regex.
+
+    Os parâmetros de rota viram ``[^/]+`` para casarem com qualquer valor,
+    enquanto o restante do caminho é escapado literalmente.
+    """
+    parts = re.split(r'(\{[^}]+\})', path)
+    pattern = ''.join(
+        '[^/]+'
+        if part.startswith('{') and part.endswith('}')
+        else re.escape(part)
+        for part in parts
+    )
+    return re.compile(f'^{pattern}$')
+
+
 def _registered_path_matchers(app: FastAPI) -> list:
-    return [
-        route.path_regex
-        for route in app.router.routes
-        if getattr(route, 'path_regex', None) is not None
-    ]
+    """
+    Coleta os padrões de rota a partir do schema OpenAPI.
+
+    No FastAPI atual os routers incluídos aparecem como um único objeto em
+    ``app.router.routes``, então iterar as rotas diretamente não expõe os
+    caminhos internos. O schema OpenAPI já traz todos os caminhos resolvidos,
+    inclusive com os prefixos dos routers.
+    """
+    try:
+        paths = app.openapi().get('paths', {})
+    except Exception:
+        return []
+
+    return [_compile_path_pattern(path) for path in paths]
 
 
 def _matches_any_path(path: str, path_matchers: list) -> bool:

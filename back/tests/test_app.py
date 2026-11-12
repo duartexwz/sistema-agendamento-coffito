@@ -5,7 +5,12 @@ from unittest.mock import AsyncMock, patch
 import pytest
 from fastapi import FastAPI
 
-from api.app import app, lifespan
+from api.app import (
+    _normalize_path,
+    _registered_path_matchers,
+    app,
+    lifespan,
+)
 
 pytestmark = pytest.mark.asyncio
 
@@ -49,3 +54,20 @@ async def test_rotas_registradas_com_sucesso():
 
     assert len(caminhos) > 0
     assert any('/login' in c for c in caminhos)
+
+
+async def test_normaliza_barra_final_para_rotas_de_colecao():
+    matchers = _registered_path_matchers(app)
+
+    assert _normalize_path('/api/v1/espacos', matchers) == '/api/v1/espacos/'
+    assert _normalize_path('/api/v1/usuarios', matchers) == '/api/v1/usuarios/'
+    assert _normalize_path('/api/v1/reservas', matchers) == '/api/v1/reservas/'
+
+
+async def test_mantem_caminhos_ja_validos():
+    matchers = _registered_path_matchers(app)
+
+    assert _normalize_path('/api/v1/espacos/', matchers) == '/api/v1/espacos/'
+    assert _normalize_path('/api/v1/espacos/1', matchers) == '/api/v1/espacos/1'
+    assert _normalize_path('/api/v1/login', matchers) == '/api/v1/login'
+    assert _normalize_path('/', matchers) == '/'
