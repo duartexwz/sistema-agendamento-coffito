@@ -101,6 +101,58 @@ async def csrf_cookie_protection(request: Request, call_next):
     return await call_next(request)
 
 
+def _registered_path_matchers(app: FastAPI) -> list:
+    return [
+        route.path_regex
+        for route in app.router.routes
+        if getattr(route, 'path_regex', None) is not None
+    ]
+
+
+def _matches_any_path(path: str, path_matchers: list) -> bool:
+    return any(matcher.match(path) for matcher in path_matchers)
+
+
+def _normalize_path(path: str, path_matchers: list) -> str:
+    if path == '/' or _matches_any_path(path, path_matchers):
+        return path
+
+    without_slash = path.rstrip('/') or '/'
+    if _matches_any_path(without_slash, path_matchers):
+        return without_slash
+
+    with_slash = f'{path}/'
+    if _matches_any_path(with_slash, path_matchers):
+        return with_slash
+
+    return path
+
+
+@app.middleware('http')
+async def normalize_trailing_slash(request: Request, call_next):
+    """
+    A Vercel remove a barra final das requisicoes (trailingSlash: false),
+    enquanto varias rotas do FastAPI sao declaradas com '/'. Como o app usa
+    redirect_slashes=False, a rota nao casaria e retornaria 404.
+
+    Este middleware reconcilia os dois formatos (com e sem barra final) antes
+    do roteamento, sem gerar redirecionamentos.
+    """
+    path_matchers = getattr(request.app.state, 'path_matchers', None)
+    if path_matchers is None:
+        path_matchers = _registered_path_matchers(request.app)
+        request.app.state.path_matchers = path_matchers
+
+    path = request.scope.get('path', '')
+    normalized = _normalize_path(path, path_matchers)
+
+    if normalized != path:
+        request.scope['path'] = normalized
+        request.scope['raw_path'] = normalized.encode('utf-8')
+
+    return await call_next(request)
+
+
 api_v1 = APIRouter(prefix='/api/v1')
 
 api_v1.include_router(auth.router)
